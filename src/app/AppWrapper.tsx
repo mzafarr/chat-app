@@ -5,7 +5,14 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
-export const AppWrapper = ({ children, isAuth, setIsAuth, setIsInChat }: any) => {
+interface AppWrapperProps {
+  children: React.ReactNode; 
+  isAuth: boolean; 
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>; 
+  setIsInChat: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const AppWrapper = ({ children, isAuth, setIsAuth, setIsInChat }: AppWrapperProps) => {
   const signUserOut = async () => {
     await signOut(auth);
     cookies.remove("auth-token");
