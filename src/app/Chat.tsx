@@ -38,7 +38,7 @@ const Chat = ({ room }: { room: string }) => {
     });
 
     return () => unsubscribe();
-  }, [room]);
+  }, [messagesRef, room]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
