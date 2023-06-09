@@ -11,8 +11,14 @@ import {
 } from "firebase/firestore";
 import dynamic from "next/dynamic";
 
-const Chat = ({ room }) => {
-  const [messages, setMessages] = useState([]);
+interface Message {
+  id: string;
+  text: string;
+  email: string;
+}
+
+const Chat = ({ room }: { room: string }) => {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const messagesRef = collection(db, "messages");
 
@@ -22,26 +28,27 @@ const Chat = ({ room }) => {
       where("room", "==", room),
       orderBy("createdAt")
     );
-    const unsuscribe = onSnapshot(queryMessages, (snapshot) => {
-      let messages = [];
+    const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
+      let messages: Message[] = [];
       snapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
+        const messageData = doc.data() as Message;
+        messages.push({ ...messageData, id: doc.id });
       });
       setMessages(messages);
     });
 
-    return () => unsuscribe();
-  }, []);
+    return () => unsubscribe();
+  }, [room]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (newMessage === "") return;
     await addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
-      user: auth.currentUser.displayName,
-      email: auth.currentUser.email,
+      user: auth.currentUser?.displayName,
+      email: auth.currentUser?.email,
       room,
     });
 
@@ -97,5 +104,5 @@ const Chat = ({ room }) => {
     </div>
   );
 };
-// export default Chat;
-export default dynamic (() => Promise.resolve(Chat), {ssr: false})
+
+export default dynamic(() => Promise.resolve(Chat), { ssr: false });
