@@ -30,13 +30,14 @@ function ChatApp() {
           setIsInChat={setIsInChat}
         >
           {!isInChat ? (
-            <div className="w-full">
+            <div className="w-full p-4 h-screen outline-none bg-slate-600 absolute inset-0 flex flex-col justify-center items-center">
               <input
                 placeholder="enter room number"
                 onChange={(e) => setRoom(e.target.value)}
-                className="w-full px-3 py-5"
+                className="w-full max-w-xs px-3 py-4 text-slate-800 text-xl"
               />
               <button
+                className="w-full max-w-xs my-4 p-3 text-2xl bg-slate-800"
                 onClick={() => {
                   setIsInChat(true);
                 }}
@@ -53,4 +54,4 @@ function ChatApp() {
   );
 }
 // export default ChatApp;
-export default dynamic (() => Promise.resolve(ChatApp), {ssr: false})
+export default dynamic(() => Promise.resolve(ChatApp), { ssr: false });
