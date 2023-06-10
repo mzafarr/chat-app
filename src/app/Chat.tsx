@@ -12,6 +12,9 @@ import {
 } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import ScrollToBottom from "react-scroll-to-bottom";
+import Image from "next/image";
+import sendIcon from "../../public/sendIcon.png"
+
 interface Message {
   id: string;
   text: string;
@@ -97,7 +100,7 @@ const Chat = ({ room }: { room: string }) => {
             placeholder="Type your message here..."
           />
           <button type="submit" className="py-2.5 px-4 bg-slate-900 rounded-r-lg">
-            S
+            <Image src={sendIcon} alt="send button" width={25} />
           </button>
         </form>
       </div>
