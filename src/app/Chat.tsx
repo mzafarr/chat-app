@@ -57,11 +57,11 @@ const Chat = ({ room }: { room: string }) => {
     setNewMessage("");
   };
   return (
-    <div className="flex flex-col justify-around items-center py-6 max-w-s h-[90vh] bg-slate-600 text-white md:text-2xl">
+    <div className="flex flex-col justify-around items-center py-6 max-w-s h-[90vh] bg-slate-600 text-white text-xl">
       <div className="text-3xl text-center mb-4">
         <h1>
           Welcome to: 
-          <span className="font-semibold"> {room.toUpperCase()}</span>
+          <span className="font-semibold">{room.toUpperCase()}</span>
         </h1>
       </div>
       <div className="max-w-[370px] flex flex-col h-full items-start justify-between rounded-md border p-4">
@@ -99,8 +99,8 @@ const Chat = ({ room }: { room: string }) => {
             className="p-2 text-slate-700 rounded-l-lg w-[90%] text-xl outline-none"
             placeholder="Type your message here..."
           />
-          <button type="submit" className="py-2.5 px-4 bg-slate-900 rounded-r-lg">
-            <Image src={sendIcon} alt="send button" width={25} />
+          <button type="submit" className="py-2.5 px-4 bg-slate-800 rounded-r-lg">
+            <Image src={sendIcon} alt="send button" width={30} />
           </button>
         </form>
       </div>
