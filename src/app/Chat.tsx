@@ -46,6 +46,7 @@ const Chat = ({ room }: { room: string }) => {
     event.preventDefault();
 
     if (newMessage === "") return;
+    setNewMessage("");
     await addDoc(messagesRef.current, { // Access the reference using .current
       text: newMessage,
       createdAt: serverTimestamp(),
@@ -54,7 +55,7 @@ const Chat = ({ room }: { room: string }) => {
       room,
     });
 
-    setNewMessage("");
+
   };
   return (
     <div className="flex flex-col justify-around items-center py-6 max-w-s h-[90vh] bg-slate-600 text-white text-xl">
